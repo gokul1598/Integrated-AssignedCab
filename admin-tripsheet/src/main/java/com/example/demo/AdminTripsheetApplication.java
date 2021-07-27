@@ -2,12 +2,23 @@ package com.example.demo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import com.example.demo.entity.BookingRequest;
+import com.example.demo.entity.Destination;
+import com.example.demo.entity.DriverInfo;
+import com.example.demo.entity.DropPoint;
+import com.example.demo.entity.Employee;
+import com.example.demo.entity.TimeSlot;
 import com.example.demo.entity.TripCabInfo;
 import com.example.demo.repos.BookingRequestRepository;
 import com.example.demo.repos.DestinationRepository;
@@ -24,32 +35,32 @@ public class AdminTripsheetApplication {
 		SpringApplication.run(AdminTripsheetApplication.class, args);
 	}
 
-	@Bean
-	public CommandLineRunner runner() {
-		return new CommandLineRunner() {
-
-			@Autowired
-			TripCabInfoRepository tripRepo;
-			@Autowired
-			BookingRequestRepository bookingRepo;
-			@Autowired
-			DriverInfoRepository driverRepo;
-			@Autowired
-			EmployeeRepository employeeRepo;
-			@Autowired
-			DestinationRepository destinationRepo;
-
-			@Override
-			public void run(String... args) throws Exception {
-
-				// Driver details
+//	@Bean
+//	public CommandLineRunner runner() {
+//		return new CommandLineRunner() {
+//
+//			@Autowired
+//			TripCabInfoRepository tripRepo;
+//			@Autowired
+//			BookingRequestRepository bookingRepo;
+//			@Autowired
+//			DriverInfoRepository driverRepo;
+//			@Autowired
+//			EmployeeRepository employeeRepo;
+//			@Autowired
+//			DestinationRepository destinationRepo;
+//
+//			@Override
+//			public void run(String... args) throws Exception {
+//
+//				// Driver details
 //				DriverInfo driver1 = new DriverInfo(1, "Ravi", null, 68963210, null, null, null, null, null, null, 0);
 //				driverRepo.save(driver1);
 //
 //				DriverInfo driver2 = new DriverInfo(2, "Varun", null, 68963836, null, null, null, null, null, null, 0);
 //				driverRepo.save(driver2);
-//
-//				// Time Slot
+////
+////				// Time Slot
 //				TimeSlot slot1 = new TimeSlot(1, LocalTime.of(20, 30), null, null, null, null, 0);
 //				TimeSlot slot2 = new TimeSlot(2, LocalTime.of(22, 30), null, null, null, null, 0);
 //				List<TimeSlot> slots1 = new ArrayList<TimeSlot>();
@@ -59,8 +70,8 @@ public class AdminTripsheetApplication {
 //				TimeSlot slot4 = new TimeSlot(2, LocalTime.of(22, 30), null, null, null, null, 0);
 //				List<TimeSlot> slots2 = new ArrayList<TimeSlot>();
 //				slots2.addAll(Arrays.asList(slot3, slot4));
-//
-//				// Drop Point
+////
+////				// Drop Point
 //				DropPoint drop1 = new DropPoint(1, "Medavakkam", null, null, null, null, 0);
 //				DropPoint drop2 = new DropPoint(2, "Sembakkam", null, null, null, null, 0);
 //				DropPoint drop3 = new DropPoint(3, "CampRoad", null, null, null, null, 0);
@@ -73,14 +84,14 @@ public class AdminTripsheetApplication {
 //				List<DropPoint> drops2 = new ArrayList<DropPoint>();
 //				drops2.addAll(Arrays.asList(drop4, drop5, drop6));
 //
-//				// Destination
+////				// Destination
 //				Destination dest1 = new Destination(1, "Tambaram", drops1, slots1, null, null, null, null, 0);
 //				destinationRepo.save(dest1);
 //
 //				Destination dest2 = new Destination(2, "Vellachery", drops2, slots2, null, null, null, null, 0);
 //				destinationRepo.save(dest2);
-
-				// Employee Details
+//
+//				 //Employee Details
 //				Employee emp1 = new Employee("Ava-201", "Vishwa", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp1);
 //				Employee emp2 = new Employee("Ava-202", "Jerry", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
@@ -91,26 +102,26 @@ public class AdminTripsheetApplication {
 //				employeeRepo.save(emp4);
 //				Employee emp5 = new Employee("Ava-205", "Rubin", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp5);
-//				Employee emp6 = new Employee("Ava-206", "Nishok ", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
+//				Employee emp6 = new Employee("Ava-206", "Nishok", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp6);
 //				Employee emp7 = new Employee("Ava-207", "Jawahar ", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp7);
-//				Employee emp8 = new Employee("Ava-208", "Rohit ", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
+//				Employee emp8 = new Employee("Ava-208", "Rohit", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp8);
-//				Employee emp9 = new Employee("Ava-209", "Kumar ", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
+//				Employee emp9 = new Employee("Ava-209", "Kumar", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp9);
-//				Employee emp10 = new Employee("Ava-210", "Kishore ", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
+//				Employee emp10 = new Employee("Ava-210", "Kishore", 0, 0, 0, null, null, null, null, null, null, null, null, null, 0);
 //				employeeRepo.save(emp10);
-
-				// Trip Details
-				TripCabInfo trip1 = new TripCabInfo(102, "TN24G9999", 1, "BayLine", "Tambaram", LocalDate.now(),
-						LocalTime.of(9, 30), 7, 6, 1, "Yet to Start", null, null, null, null, null, null, 0);
-//				TripCabInfo trip2 = new TripCabInfo(102, "TN24G9999", 1, "BayLine", "Tambaram", LocalDate.now(),
-//						LocalTime.of(9, 30), 7, 6, 1, "Yet to Start", null, null, null, null, null, null, 0);
-				tripRepo.save(trip1);
+//
+//				// Trip Details
+//				TripCabInfo trip1 = new TripCabInfo(1, "TN24G9999", 1, "BayLine", "Tambaram", LocalDate.now(),
+//						LocalTime.of(9, 30), 7, 6, 1, "Assigned", null, null, null, null, null, null, 0);
+//				TripCabInfo trip2 = new TripCabInfo(2, "TN24G9999", 1, "BayLine", "Tambaram", LocalDate.now(),
+//						LocalTime.of(9, 30), 7, 6, 1, "Assigned", null, null, null, null, null, null, 0);
+//				tripRepo.save(trip1);
 //				tripRepo.save(trip2);
-
-				// BookingRequest Details
+//
+//				// BookingRequest Details
 //				BookingRequest request1 = new BookingRequest(901,"Ava-201", "Vishwa", "Alpla City", "Tambaram", "Medavakkam",
 //						LocalTime.of(8, 30), 0, 1, null, null, null, null, "Assigned", null, null, null, null, 0);
 //				BookingRequest request2 = new BookingRequest(902, "Ava-202", "Jerry", "Alpha City", "Tambaram", "Camp Road",
@@ -131,18 +142,18 @@ public class AdminTripsheetApplication {
 //				bookingRepo.save(request6);
 //				
 //				
-//				BookingRequest request7 = new BookingRequest(907, "Ava-207", "Jawahar", "Alpha City", "Tambaram", "Koot Road",
-//						LocalTime.of(8, 30), 0, 102, null, null, null, null, "Assigned", null, null, null, null, 0);
-//				BookingRequest request8 = new BookingRequest(908,"Ava-208", "Rohit", "Alpha City", "Tambaram", "Camp Road",
-//						LocalTime.of(8, 30), 0, 102, null, null, null, null, "Assigned", null, null, null, null, 0);
-//				BookingRequest request9 = new BookingRequest(909, "Ava-209", "Kumar", "Alpha City", "Tambaram", "Medavakkam",
-//						LocalTime.of(8, 30), 0, 102, null, null, null, null, "Assigned", null, null, null, null, 0);
+//				BookingRequest request7 = new BookingRequest(907, "Ava-207", "Jawahar", "Alpha City", "Vellachery", "Koot Road",
+//						LocalTime.of(8, 30), 0, 2, null, null, null, null, "Assigned", null, null, null, null, 0);
+//				BookingRequest request8 = new BookingRequest(908,"Ava-208", "Rohit", "Alpha City", "Vellachery", "Camp Road",
+//						LocalTime.of(8, 30), 0, 2, null, null, null, null, "Assigned", null, null, null, null, 0);
+//				BookingRequest request9 = new BookingRequest(909, "Ava-209", "Kumar", "Alpha City", "Vellachery", "Medavakkam",
+//						LocalTime.of(8, 30), 0, 2, null, null, null, null, "Assigned", null, null, null, null, 0);
 //
 //				bookingRepo.save(request7);
 //				bookingRepo.save(request8);
 //				bookingRepo.save(request9);
-			}
-		};
-	}
+//			}
+//		};
+//	}
 
 }

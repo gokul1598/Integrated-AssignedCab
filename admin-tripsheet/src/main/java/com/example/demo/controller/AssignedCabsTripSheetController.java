@@ -77,14 +77,18 @@ public class AssignedCabsTripSheetController {
 	
 	//add new employee
 	@PostMapping(path = "/tripsheet/addemployee/{tripCabId}")
-	public ResponseEntity<BookingRequest> addEmployee(@RequestBody BookingRequest request, @PathVariable("tripCabId") long tripCabId)
-	{
-		
-		BookingRequest req=this.tripSheetBl.addEmployee(request, tripCabId);
-		
-		return ResponseEntity.status(HttpStatus.OK).body(req);
-				
-	}
+    public ResponseEntity<BookingRequest> addEmployee(@RequestBody BookingRequest request, @PathVariable("tripCabId") long tripCabId)
+    {
+       
+        BookingRequest req=this.tripSheetBl.addEmployee(request, tripCabId);
+       
+        if(req==null) {
+            return ResponseEntity.status(HttpStatus.ALREADY_REPORTED).body(req);
+        }
+       
+        return ResponseEntity.status(HttpStatus.OK).body(req);
+               
+    }
 	
 	
 	

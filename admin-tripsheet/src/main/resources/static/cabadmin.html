@@ -216,7 +216,7 @@
       </div>
       <!--search ends here-->
       <!--button starts here-->
-     
+     <span id="topScrollButton" class="absolute-btn"><img src="images/Scrollup.svg" id="ScrollUp"></span>
 
     </div>
   
@@ -226,7 +226,7 @@
     <div class="tab-content" id="pills-tabContent">
       <div class="tab-pane fade show active" id="pills-todaysrequest" role="tabpanel"
         aria-labelledby="pills-todaysrequest-tab">
-        <div class="w-100 float-start border fixTableHead table-scroll">
+        <div class="w-100 float-start border ">
           <table class="table mb-0 caps-grid">
             <thead>
               <tr class="display-shadow">
@@ -843,6 +843,7 @@
         	$("#cab-body").empty();
         	skip=0;
         	getAssignedCabs(skip,limit);
+        	 document.getElementById("searchtab").value=null;
         });
         //filterApplied=true;
     var cancel=document.getElementById("cancelbtn");  // CancelButton to get All AssignedCab
@@ -892,7 +893,7 @@
 //Function to display all AssignedCabs -->ProcessResponse2  
    function processResponse2(){
     	  event.preventDefault();
-   
+        
         if(xhr.readyState == 4 && xhr.status == 200)
             {
         	// $("#cab-body").empty();
@@ -1073,9 +1074,9 @@
 			// condition to check the destination matches with selected
 				if ((destinations[i].destination) == selectedDestination) {
 
-				   for (var j = 0; j < destinations[i].slot.length; j++) {
+				   for (var j = 0; j < destinations[i].timeSlots.length; j++) {
                         var timeSlotOption = document.createElement("option");
-                        var slot=destinations[i].slot[j].time;
+                        var slot=destinations[i].timeSlots[j].timeSlot;
                         var slotSplitted = slot.split(":"); //[22,30,00]
                         slotHour = slotSplitted[0];
                         if(slotHour<12){
@@ -1260,15 +1261,45 @@
 //---------------------------------------------------------------------------------------------------------------------------
 
 // Scroll Function ------------------>Starts
-		document.getElementById("scroll").addEventListener(
-				'scroll',
-				function() {
+// 		document.getElementById("scroll").addEventListener(
+// 				'scroll',
+// 				function() {
 					
 
-// 				   ($("#scroll").scrollTop() + $("#scroll").height() > $(
-// 					"#cab-body").height())
-//                 ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height()) 
-					if ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height())   {
+// // 				   ($("#scroll").scrollTop() + $("#scroll").height() > $(
+// // 					"#cab-body").height())
+// //                 ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height()) 
+// 					if ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height())   {
+// 						if($('#cab-body tr').length != count){
+// 						skip = skip + limit;
+// 						if(filterApplied==false){
+// 						getAssignedCabs(skip, limit);
+// 						}else if(searchApplied==true){
+							
+// 						    getBySearch()
+// 							}else{
+						
+// 							getApplyFilter();
+						 
+// 							//filterApplied =false;
+// 						}
+// 					}
+// 					else{
+// 						skip=0;
+					
+// 					}
+// 					}
+// 				});
+window.addEventListener('scroll',()=>{
+    console.log(window.scrollY) //scrolled from top
+    console.log(window.innerHeight) //visible part of screen
+    if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight-50){
+//    skip = skip + limit;alert(skip);
+//    getTodaysBookings();
+
+ 
+
+// if ($("#scroll")[0].scrollHeight-$("#scroll").scrollTop()==$("#scroll").height())   {
 						if($('#cab-body tr').length != count){
 						skip = skip + limit;
 						if(filterApplied==false){
@@ -1287,8 +1318,9 @@
 						skip=0;
 					
 					}
-					}
-				});
+//}
+}
+})
 //-----> scroll ends 
 
 //-------------------------------------------------------------------------------------------------------------
@@ -1451,6 +1483,9 @@ function actionBtn(obj){
    
 	 window.location.href="tripsheet.html?tripcabId="+action;
 }
+$("#ScrollUp").click( function() {
+	   $(window).scrollTop(0);
+	 });
 //--->actionbtn ends
 	</script>
 </body>

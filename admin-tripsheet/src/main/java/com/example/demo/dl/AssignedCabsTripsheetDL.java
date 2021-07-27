@@ -94,20 +94,41 @@ public class AssignedCabsTripsheetDL {
 		Optional<Employee> emp=this.employeeRepo.findById(employeeId);
 		return emp.get();
 	}
-
 	public BookingRequest addEmployee(BookingRequest request, long tripCabId) {
-		request.setBookingId(bookingRequestRepo.count() + 1);
-		request.setTripCabId(tripCabId);
-		request.setStatus("Assigned");
-		BookingRequest req=this.bookingRequestRepo.save(request);
-		
-		Optional<TripCabInfo> info=this.tripCabInfoRepo.findById(request.getTripCabId());
-		TripCabInfo trip=info.get();
-		trip.setAllocatedSeats(trip.getAllocatedSeats()+1);
-		trip.setRemainingSeats(trip.getRemainingSeats()-1);
-		this.tripCabInfoRepo.save(trip);
-		return req;
-	}
+//      Query query = new Query();
+//     
+//      Criteria c1 = Criteria.where("employeeId").is(request.getEmployeeId());
+//      Criteria c2 = Criteria.where("status").is("Assigned");
+//      Criteria c3 = Criteria.where("status").is("Inprogress");
+//     
+//      Criteria c4 = new Criteria();
+//      Criteria c5 = new Criteria();
+//     
+//      c4.orOperator(c2,c3);
+//      c5.andOperator(c1,c4);
+//     
+//      query.addCriteria(c5);
+//     
+//      List<BookingRequest> alreadyExist = this.template.find(query, BookingRequest.class, "BookingRequest");
+      BookingRequest alreadyExist = this.bookingRequestRepo.findByEmployeeId(request.getEmployeeId());
+      if(alreadyExist==null) {
+         
+          request.setBookingId(bookingRequestRepo.count() + 1);
+          request.setTripCabId(tripCabId);
+          request.setStatus("Assigned");
+          BookingRequest req=this.bookingRequestRepo.save(request);
+         
+          Optional<TripCabInfo> info=this.tripCabInfoRepo.findById(request.getTripCabId());
+          TripCabInfo trip=info.get();
+          trip.setAllocatedSeats(trip.getAllocatedSeats()+1);
+          trip.setRemainingSeats(trip.getRemainingSeats()-1);
+          this.tripCabInfoRepo.save(trip);
+          return req;
+      }
+     
+      return null;
+  }
+	
 
 	public boolean updateEmployee(BookingRequest request) {
 		

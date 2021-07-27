@@ -1028,3 +1028,10 @@ padding: 10px 10px;
 {
 background-color: lightgray;
 }
+.absolute-btn
+{
+    position:fixed;
+    padding-left:12px;
+    margin-top:38.5%;
+    cursor:pointer;
+}
